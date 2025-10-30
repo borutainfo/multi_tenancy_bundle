@@ -1,6 +1,6 @@
 {
-    "name": "hakam/multi-tenancy-bundle",
-    "description": "Flexible and production-ready multi-tenancy bundle for Symfony.",
+    "name": "boruta/multi-tenancy-bundle",
+    "description": "Flexible and production-ready multi-tenancy bundle for Symfony. Fork on: RamyHakam/multi_tenancy_bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
