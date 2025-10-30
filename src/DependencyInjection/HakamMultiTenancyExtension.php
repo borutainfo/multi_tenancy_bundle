@@ -98,8 +98,14 @@ class HakamMultiTenancyExtension extends Extension implements PrependExtensionIn
             }
 
             if (!isset($bundles['doctrine_migrations'])) {
+                $doctrineMigrationsConfig = $container->getExtensionConfig('doctrine_migrations');
+                $migrationTableName = (string)($doctrineMigrationsConfig[0]['storage']['table_storage']['table_name'] ?? '');
+                $tenantMigrationsConfig = ['migrations_paths' => $tenantDoctrineMigrationPath];
+                if (!empty($migrationTableName)) {
+                    $tenantMigrationsConfig['table_storage']['table_name'] = $migrationTableName;
+                }
                 //    $container->prependExtensionConfig('doctrine_migrations', ['migrations_paths' => $tenantDoctrineMigrationPath]);
-                $container->setParameter('tenant_doctrine_migration', ['migrations_paths' => $tenantDoctrineMigrationPath]);
+                $container->setParameter('tenant_doctrine_migration', $tenantMigrationsConfig);
             } else {
                 throw new InvalidConfigurationException('You need to enable Doctrine Migration Bundle to be able to use MultiTenancy Bundle');
             }
